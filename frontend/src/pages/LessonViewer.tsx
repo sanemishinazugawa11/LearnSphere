@@ -40,12 +40,12 @@ const LessonViewer: React.FC = () => {
     if (!courseId || !lessonId) { setPageError("Invalid lesson route."); setIsLoading(false); return; }
     setIsLoading(true); setPageError(null); setAccessNotice(null); setQuizResult(null); setSelectedAnswer(null);
 
-    try {
+     try {
       const { data: lessons } = await api.get(`/courses/${courseId}/lessons`);
       const currentLesson = (lessons || []).find((l: Lesson) => l.id === lessonId) || null;
       setLesson(currentLesson);
       if (!currentLesson) setPageError("Lesson not found.");
-
+      console.log(accessNotice)
       try {
         const { data: quizData } = await api.get(`/lessons/${lessonId}/quiz`);
         setQuiz(quizData);
